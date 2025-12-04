@@ -4,6 +4,10 @@ export const APP_ROUTES = {
   alerts: '/alerts',
   history: '/history',
   settings: '/settings',
+  welcome: '/welcome',
+  register: '/register',
+  login: '/login',
+  animals: '/animals',
 };
 
 export const NAV_ITEMS = [
@@ -30,6 +34,10 @@ export function routeToCrumbs(pathname) {
     '/alerts': [{ to: '/', label: 'Home' }, { to: '/alerts', label: 'Alerts' }],
     '/history': [{ to: '/', label: 'Home' }, { to: '/history', label: 'History' }],
     '/settings': [{ to: '/', label: 'Home' }, { to: '/settings', label: 'Settings' }],
+    '/animals': [{ to: '/', label: 'Home' }, { to: '/animals', label: 'Animals' }],
+    '/welcome': [{ to: '/welcome', label: 'Welcome' }],
+    '/register': [{ to: '/register', label: 'Register' }],
+    '/login': [{ to: '/login', label: 'Login' }],
   };
   return map[pathname] || [{ to: '/', label: 'Home' }];
 }

@@ -1,12 +1,15 @@
 import React from 'react';
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import TopBar from './components/TopBar';
 import Sidebar from './components/Sidebar';
 import Breadcrumbs from './components/Breadcrumbs';
 import AlertPanel from './components/AlertPanel';
 import ModalHost from './components/Modal';
 import { APP_ROUTES } from './utils/constants';
+import Welcome from './pages/Welcome';
+import Register from './pages/Register';
+import Login from './pages/Login';
 
 // Simple placeholder pages
 function Page({ title, description }) {
@@ -21,8 +24,19 @@ function Page({ title, description }) {
   );
 }
 
-// PUBLIC_INTERFACE
-function App() {
+function AppChrome({ children }) {
+  // Hide topbar/sidebar/breadcrumbs on auth routes
+  const location = useLocation();
+  const authPaths = ['/welcome', '/login', '/register'];
+  const hideChrome = authPaths.includes(location.pathname);
+  if (hideChrome) {
+    return (
+      <div className="app-root">
+        {children}
+        <ModalHost />
+      </div>
+    );
+  }
   return (
     <div className="app-root">
       <TopBar />
@@ -31,19 +45,41 @@ function App() {
         <main className="content">
           <Breadcrumbs />
           <div className="content-inner">
-            <Routes>
-              <Route path={APP_ROUTES.dashboard} element={<Page title="Dashboard" description="Overview of monitored habitats and AI insights." />} />
-              <Route path={APP_ROUTES.liveFeed} element={<Page title="Live Feed" description="Real-time streams and detections." />} />
-              <Route path={APP_ROUTES.alerts} element={<Page title="Alerts" description="Alert summaries and triage." />} />
-              <Route path={APP_ROUTES.history} element={<Page title="History" description="Historical trends and events." />} />
-              <Route path={APP_ROUTES.settings} element={<Page title="Settings" description="Application preferences." />} />
-            </Routes>
+            {children}
           </div>
         </main>
       </div>
       <AlertPanel />
       <ModalHost />
     </div>
+  );
+}
+
+// PUBLIC_INTERFACE
+function App() {
+  return (
+    <AppChrome>
+      <Routes>
+        {/* Initial route redirect */}
+        <Route path="/" element={<Navigate to="/welcome" replace />} />
+
+        {/* Auth routes */}
+        <Route path="/welcome" element={<Welcome />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+
+        {/* App routes */}
+        <Route path={APP_ROUTES.dashboard} element={<Page title="Dashboard" description="Overview of monitored habitats and AI insights." />} />
+        <Route path="/animals" element={<Page title="Animal Selection" description="Choose an animal to view its habitat and live feed." />} />
+        <Route path={APP_ROUTES.liveFeed} element={<Page title="Live Feed" description="Real-time streams and detections." />} />
+        <Route path={APP_ROUTES.alerts} element={<Page title="Alerts" description="Alert summaries and triage." />} />
+        <Route path={APP_ROUTES.history} element={<Page title="History" description="Historical trends and events." />} />
+        <Route path={APP_ROUTES.settings} element={<Page title="Settings" description="Application preferences." />} />
+
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/welcome" replace />} />
+      </Routes>
+    </AppChrome>
   );
 }
 
