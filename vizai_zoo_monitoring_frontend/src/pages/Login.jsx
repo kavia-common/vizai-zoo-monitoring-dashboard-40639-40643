@@ -7,6 +7,9 @@ import { useApp } from '../state/AppContext';
 /**
  * PUBLIC_INTERFACE
  * Login screen per spec:
+ * - Mandatory Role dropdown (must select non-placeholder)
+ * - Remember Me checkbox (persists minimal flag locally)
+ * - Enter-to-submit supported by form submit
  * - On success -> /animals (Animal Selection)
  * - On incorrect -> inline error
  * - Footer "Register" link -> /register
@@ -19,7 +22,12 @@ import { useApp } from '../state/AppContext';
 export default function Login() {
   const navigate = useNavigate();
   const { actions } = useApp();
-  const [form, setForm] = useState({ email: '', password: '' });
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+    role: '',        // required selection
+    remember: false, // remember me flag
+  });
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
@@ -27,41 +35,56 @@ export default function Login() {
   const DEMO_PASSWORD = 'demo1234';
 
   const onChange = (e) => {
-    const { name, value } = e.target;
-    setForm((f) => ({ ...f, [name]: value }));
-    // Clear error as user edits inputs
+    const { name, value, type, checked } = e.target;
+    setForm((f) => ({ ...f, [name]: type === 'checkbox' ? checked : value }));
     if (error) setError('');
   };
 
   const isValidEmail = (value) => /^[^@]+@[^@]+\.[^@]+$/.test(String(value || '').trim());
 
-  const submit = async (e) => {
-    e.preventDefault();
-
-    if (submitting) return;
-    setSubmitting(true);
-
-    // Basic required validation + email format
+  // derived validation state to block submit
+  const validationState = (() => {
     const email = String(form.email || '').trim();
     const password = String(form.password || '');
+    const roleValid = !!form.role;
+    const emailOk = !!email && isValidEmail(email);
+    const passOk = !!password;
+    return { emailOk, passOk, roleValid };
+  })();
 
-    if (!email || !password) {
-      setError('Please enter email and password.');
-      setSubmitting(false);
+  const submit = async (e) => {
+    e.preventDefault();
+    if (submitting) return;
+
+    // check required fields incl. role
+    const email = String(form.email || '').trim();
+    const password = String(form.password || '');
+    if (!email || !password || !form.role) {
+      setError('Please enter email, password, and select your role.');
       return;
     }
     if (!isValidEmail(email)) {
       setError('Enter a valid email address.');
-      setSubmitting(false);
       return;
     }
+
+    setSubmitting(true);
 
     // Stubbed authentication: accept only the specific demo account
     const isDemoAccount = email.toLowerCase() === DEMO_EMAIL && password === DEMO_PASSWORD;
 
     if (isDemoAccount) {
       setError('');
-      // In a real app, you might set auth state/tokens here.
+
+      // Persist "remember me" choice (stub; no tokens)
+      try {
+        localStorage.setItem('vizai_auth_remember', JSON.stringify(!!form.remember));
+        localStorage.setItem('vizai_auth_role', form.role);
+        localStorage.setItem('vizai_auth_email', email);
+      } catch {
+        // ignore quota
+      }
+
       navigate('/animals', { replace: true });
       setSubmitting(false);
       return;
@@ -99,6 +122,7 @@ export default function Login() {
               aria-invalid={!!error && !isValidEmail(form.email) ? 'true' : 'false'}
             />
           </div>
+
           <div className="field">
             <label htmlFor="password">Password</label>
             <input
@@ -111,15 +135,47 @@ export default function Login() {
               autoComplete="current-password"
             />
           </div>
+
+          <div className="field">
+            <label htmlFor="role">Role</label>
+            <select
+              id="role"
+              name="role"
+              value={form.role}
+              onChange={onChange}
+              aria-required="true"
+              aria-invalid={!validationState.roleValid ? 'true' : 'false'}
+            >
+              <option value="">Select a role…</option>
+              <option value="zookeeper">Zookeeper</option>
+              <option value="vet">Veterinarian</option>
+              <option value="analyst">Analyst</option>
+              <option value="admin">Administrator</option>
+            </select>
+          </div>
+
           {error ? <div className="error-banner" role="alert">{error}</div> : null}
-          <div className="row-between">
+
+          <div className="row-between" style={{ justifyContent: 'space-between' }}>
+            <label style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+              <input
+                type="checkbox"
+                id="remember"
+                name="remember"
+                checked={form.remember}
+                onChange={onChange}
+              />
+              Remember me
+            </label>
             <button type="button" className="linklike" onClick={openForgotModal}>Forgot password?</button>
           </div>
+
           <button
             type="submit"
             className="btn-primary wide"
             aria-label="Login"
-            disabled={submitting}
+            disabled={submitting || !validationState.emailOk || !validationState.passOk || !validationState.roleValid}
+            title={!validationState.roleValid ? 'Please select your role' : undefined}
           >
             {submitting ? 'Signing in…' : 'Sign in'}
           </button>
