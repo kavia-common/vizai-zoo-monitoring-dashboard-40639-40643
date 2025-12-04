@@ -198,7 +198,7 @@ export default function Reports() {
             {sections.behaviorTrends && (
               <div className="card" style={{ background: 'var(--color-surface-2)' }}>
                 <div style={{ fontWeight: 800, marginBottom: 6 }}>Behavior trends</div>
-                <div className="page-desc">Stubbed stacked bars per day for Curiosity, Calm, Caution, Explore.</div>
+                <div className="page-desc">Stubbed stacked bars per day for Pacing, Moving, Scratching, Recumbent, Non-Recumbent.</div>
                 <div style={{ display: 'grid', gap: 8, marginTop: 8 }}>
                   {['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map((d, i) => {
                     const scale = (n) => Math.max(8, Math.floor(n * 0.9) + 12);

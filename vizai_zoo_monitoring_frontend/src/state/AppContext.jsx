@@ -11,7 +11,7 @@ export const AppContext = createContext(null);
 export function AppProvider({ children }) {
   const initialState = {
     theme: 'neon', // 'neon' | 'light'
-    dateRange: { preset: 'Last 24h', from: null, to: null },
+    dateRange: { preset: 'Today', from: null, to: null },
     filters: {},
     chat: {
       // Each message: { id, role: 'user'|'assistant'|'system', content, ts, meta? }

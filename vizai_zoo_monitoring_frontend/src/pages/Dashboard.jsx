@@ -16,7 +16,7 @@ export default function Dashboard() {
   const { state, actions } = useApp();
   const navigate = useNavigate();
 
-  const presets = ['Last 24h', 'Last 7d', 'Last 30d'];
+  const presets = ['Today', 'Last 7 Days', 'Last 30 Days', 'Custom'];
   const [from, setFrom] = React.useState(state.dateRange.from || '');
   const [to, setTo] = React.useState(state.dateRange.to || '');
   const [preset, setPreset] = React.useState(state.dateRange.preset || 'Last 24h');
@@ -115,10 +115,11 @@ export default function Dashboard() {
           </div>
           <div style={{ display: 'grid', gap: 8 }}>
             {[
-              { key: 'curiosity', label: 'Curiosity', color: 'var(--behavior-curiosity)', value: 42 },
-              { key: 'calm', label: 'Calm', color: 'var(--behavior-calm)', value: 68 },
-              { key: 'caution', label: 'Caution', color: 'var(--behavior-caution)', value: 14 },
-              { key: 'explore', label: 'Explore', color: 'var(--behavior-explore)', value: 27 },
+              { key: 'pacing', label: 'Pacing', color: 'var(--behavior-pacing, #F59E0B)', value: 42 },
+              { key: 'moving', label: 'Moving', color: 'var(--behavior-moving, #10B981)', value: 68 },
+              { key: 'scratching', label: 'Scratching', color: 'var(--behavior-scratching, #EF4444)', value: 14 },
+              { key: 'recumbent', label: 'Recumbent', color: 'var(--behavior-recumbent, #3B82F6)', value: 27 },
+              { key: 'non_recumbent', label: 'Non-Recumbent', color: 'var(--behavior-non-recumbent, #8B5CF6)', value: 31 },
             ].map((b) => (
               <button
                 key={b.key}
@@ -157,10 +158,11 @@ export default function Dashboard() {
           <div className="page-desc">Stub visualization; click bars to filter Timeline.</div>
           <div style={{ display: 'grid', gap: 10, marginTop: 8 }}>
             {[
-              { key: 'curiosity', label: 'Curiosity', minutes: 3.2, color: 'var(--behavior-curiosity)' },
-              { key: 'calm', label: 'Calm', minutes: 12.7, color: 'var(--behavior-calm)' },
-              { key: 'caution', label: 'Caution', minutes: 1.1, color: 'var(--behavior-caution)' },
-              { key: 'explore', label: 'Explore', minutes: 4.5, color: 'var(--behavior-explore)' },
+              { key: 'pacing', label: 'Pacing', minutes: 3.2, color: 'var(--behavior-pacing, #F59E0B)' },
+              { key: 'moving', label: 'Moving', minutes: 12.7, color: 'var(--behavior-moving, #10B981)' },
+              { key: 'scratching', label: 'Scratching', minutes: 1.1, color: 'var(--behavior-scratching, #EF4444)' },
+              { key: 'recumbent', label: 'Recumbent', minutes: 20.5, color: 'var(--behavior-recumbent, #3B82F6)' },
+              { key: 'non_recumbent', label: 'Non-Recumbent', minutes: 6.0, color: 'var(--behavior-non-recumbent, #8B5CF6)' },
             ].map((d) => (
               <button
                 key={d.key}

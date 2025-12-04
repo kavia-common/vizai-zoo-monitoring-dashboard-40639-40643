@@ -65,8 +65,8 @@ function App() {
   return (
     <AppChrome>
       <Routes>
-        {/* Initial route redirect */}
-        <Route path="/" element={<Navigate to={APP_ROUTES.welcome} replace />} />
+        {/* Initial route redirect (Login is start route) */}
+        <Route path="/" element={<Navigate to={APP_ROUTES.login} replace />} />
 
         {/* Auth routes */}
         <Route path={APP_ROUTES.welcome} element={<Welcome />} />
@@ -87,7 +87,7 @@ function App() {
         <Route path={APP_ROUTES.settings} element={<Page title="Settings" description="Application preferences." />} />
 
         {/* Fallback */}
-        <Route path="*" element={<Navigate to={APP_ROUTES.welcome} replace />} />
+        <Route path="*" element={<Navigate to={APP_ROUTES.login} replace />} />
       </Routes>
     </AppChrome>
   );

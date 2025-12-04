@@ -68,7 +68,7 @@ export default function Timeline() {
       {
         id: 'ev1',
         timestamp: '2025-05-15 10:03',
-        behavior: 'curiosity',
+        behavior: 'pacing',
         duration: 14,
         timeOfDay: 'morning',
         hour: 10,
@@ -79,7 +79,7 @@ export default function Timeline() {
       {
         id: 'ev2',
         timestamp: '2025-05-15 11:21',
-        behavior: 'explore',
+        behavior: 'moving',
         duration: 33,
         timeOfDay: 'noon',
         hour: 11,
@@ -90,7 +90,7 @@ export default function Timeline() {
       {
         id: 'ev3',
         timestamp: '2025-05-15 15:44',
-        behavior: 'calm',
+        behavior: 'recumbent',
         duration: 120,
         timeOfDay: 'afternoon',
         hour: 15,
@@ -101,7 +101,7 @@ export default function Timeline() {
       {
         id: 'ev4',
         timestamp: '2025-05-15 20:10',
-        behavior: 'caution',
+        behavior: 'scratching',
         duration: 18,
         timeOfDay: 'night',
         hour: 20,
@@ -142,14 +142,16 @@ export default function Timeline() {
       </p>
 
       <div className="card" style={{ marginBottom: 12 }}>
-        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', width: '100%' }}>
           <button className="btn-secondary" style={{ height: 36, padding: '0 10px' }} onClick={() => navigate(APP_ROUTES.dashboard)}>Dashboard</button>
           <button className="btn-secondary" style={{ height: 36, padding: '0 10px' }} aria-current="page">Timeline</button>
           <button className="btn-secondary" style={{ height: 36, padding: '0 10px' }} onClick={() => navigate(APP_ROUTES.reports)}>Reports</button>
           <button className="btn-secondary" style={{ height: 36, padding: '0 10px' }} onClick={() => navigate(APP_ROUTES.chat)}>Chat</button>
-          <span style={{ marginLeft: 'auto', color: 'var(--color-text-muted)' }}>
-            Click a card to open video. Filters persist across pages.
-          </span>
+          <div style={{ display: 'inline-flex', gap: 6, marginLeft: 'auto' }} aria-label="Zoom controls (placeholder)">
+            <button className="btn-secondary" style={{ height: 30, padding: '0 8px' }} title="Hour view">Hour</button>
+            <button className="btn-secondary" style={{ height: 30, padding: '0 8px' }} title="Day view">Day</button>
+            <button className="btn-secondary" style={{ height: 30, padding: '0 8px' }} title="Week view">Week</button>
+          </div>
         </div>
       </div>
 
@@ -160,10 +162,11 @@ export default function Timeline() {
             <label htmlFor="behavior">Behavior</label>
             <select id="behavior" value={behavior} onChange={(e) => setBehavior(e.target.value)}>
               <option value="">Any</option>
-              <option value="curiosity">Curiosity</option>
-              <option value="calm">Calm</option>
-              <option value="caution">Caution</option>
-              <option value="explore">Explore</option>
+              <option value="pacing">Pacing</option>
+              <option value="moving">Moving</option>
+              <option value="scratching">Scratching</option>
+              <option value="recumbent">Recumbent</option>
+              <option value="non_recumbent">Non-Recumbent</option>
             </select>
           </div>
 

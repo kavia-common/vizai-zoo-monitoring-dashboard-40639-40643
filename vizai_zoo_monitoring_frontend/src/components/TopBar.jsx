@@ -12,7 +12,7 @@ export default function TopBar() {
     <header className="topbar">
       <div className="left">
         <button className="icon-btn" onClick={actions.toggleSidebar} aria-label="Toggle navigation">☰</button>
-        <Link to={APP_ROUTES.animals} className="brand" title="Go to Animal Selection">
+        <Link to={APP_ROUTES.dashboard} className="brand" title="Go to Dashboard">
           VIZAI
           <span className="brand-accent">•</span>
         </Link>
@@ -42,6 +42,28 @@ export default function TopBar() {
           🔔
           {state.alerts.unreadCount ? <span className="badge-dot" /> : null}
         </button>
+        <details className="user-menu" style={{ marginLeft: 8 }}>
+          <summary className="btn-secondary" style={{ height: 30, padding: '0 10px', listStyle: 'none' }}>
+            User
+          </summary>
+          <div className="card" style={{ position: 'absolute', right: 12, marginTop: 6 }}>
+            <Link to={APP_ROUTES.dashboard} className="btn-secondary" style={{ display: 'block', padding: '6px 10px', borderRadius: 8 }}>
+              Dashboard
+            </Link>
+            <Link to={APP_ROUTES.timeline} className="btn-secondary" style={{ display: 'block', padding: '6px 10px', borderRadius: 8, marginTop: 6 }}>
+              Timeline
+            </Link>
+            <Link to={APP_ROUTES.reports} className="btn-secondary" style={{ display: 'block', padding: '6px 10px', borderRadius: 8, marginTop: 6 }}>
+              Reports
+            </Link>
+            <Link to={APP_ROUTES.chat} className="btn-secondary" style={{ display: 'block', padding: '6px 10px', borderRadius: 8, marginTop: 6 }}>
+              Chat
+            </Link>
+            <Link to={APP_ROUTES.login} className="btn-secondary" style={{ display: 'block', padding: '6px 10px', borderRadius: 8, marginTop: 6 }}>
+              Logout
+            </Link>
+          </div>
+        </details>
       </div>
     </header>
   );

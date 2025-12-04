@@ -65,13 +65,14 @@ export default function Chat() {
     const p = prompt.toLowerCase();
     const actionsList = [];
 
-    if (p.includes('timeline') || p.includes('curiosity') || p.includes('calm') || p.includes('caution') || p.includes('explore') || p.includes('events')) {
+    if (p.includes('timeline') || p.includes('pacing') || p.includes('moving') || p.includes('scratching') || p.includes('recumbent') || p.includes('non-recumbent') || p.includes('events')) {
       // Add View Timeline action with an inferred behavior filter
       let behavior;
-      if (p.includes('curiosity')) behavior = 'curiosity';
-      else if (p.includes('calm')) behavior = 'calm';
-      else if (p.includes('caution')) behavior = 'caution';
-      else if (p.includes('explore')) behavior = 'explore';
+      if (p.includes('pacing')) behavior = 'pacing';
+      else if (p.includes('moving')) behavior = 'moving';
+      else if (p.includes('scratching')) behavior = 'scratching';
+      else if (p.includes('recumbent')) behavior = 'recumbent';
+      else if (p.includes('non-recumbent') || p.includes('non recumbent')) behavior = 'non_recumbent';
       actionsList.push({
         type: 'view_timeline',
         label: 'View Timeline',
@@ -85,7 +86,7 @@ export default function Chat() {
         label: 'Show Video',
         payload: {
           timestamp: '2025-05-15 11:21',
-          behavior: 'explore',
+          behavior: 'moving',
           duration: 33,
           timeOfDay: 'noon',
           hour: 11,
@@ -119,7 +120,7 @@ export default function Chat() {
           label: 'Show Video',
           payload: {
             timestamp: '2025-05-15 10:03',
-            behavior: 'curiosity',
+            behavior: 'pacing',
             duration: 14,
             timeOfDay: 'morning',
             hour: 10,

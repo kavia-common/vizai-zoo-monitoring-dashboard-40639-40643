@@ -85,7 +85,7 @@ export default function Login() {
         // ignore quota
       }
 
-      navigate('/animals', { replace: true });
+      navigate('/dashboard', { replace: true });
       setSubmitting(false);
       return;
     }
