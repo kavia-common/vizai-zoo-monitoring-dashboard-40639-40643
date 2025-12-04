@@ -14,6 +14,7 @@ export function AppProvider({ children }) {
     dateRange: { preset: 'Last 24h', from: null, to: null },
     filters: {},
     chat: {
+      // Each message: { id, role: 'user'|'assistant'|'system', content, ts, meta? }
       history: [],
       minimized: true,
     },
@@ -50,6 +51,9 @@ export function AppProvider({ children }) {
       case 'ADD_CHAT_MESSAGE': {
         const history = [...state.chat.history, action.payload];
         return { ...state, chat: { ...state.chat, history } };
+      }
+      case 'SET_CHAT_HISTORY': {
+        return { ...state, chat: { ...state.chat, history: Array.isArray(action.payload) ? action.payload : [] } };
       }
       case 'TOGGLE_CHAT':
         return { ...state, chat: { ...state.chat, minimized: !state.chat.minimized } };
@@ -123,6 +127,8 @@ export function AppProvider({ children }) {
     setFilters: (f) => dispatch({ type: 'SET_FILTERS', payload: f }),
     // PUBLIC_INTERFACE
     addChatMessage: (m) => dispatch({ type: 'ADD_CHAT_MESSAGE', payload: m }),
+    // PUBLIC_INTERFACE
+    setChatHistory: (arr) => dispatch({ type: 'SET_CHAT_HISTORY', payload: arr }),
     // PUBLIC_INTERFACE
     toggleChat: () => dispatch({ type: 'TOGGLE_CHAT' }),
     // PUBLIC_INTERFACE
