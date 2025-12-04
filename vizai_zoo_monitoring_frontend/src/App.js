@@ -65,8 +65,8 @@ function App() {
   return (
     <AppChrome>
       <Routes>
-        {/* Initial route redirect (Login is start route) */}
-        <Route path="/" element={<Navigate to={APP_ROUTES.login} replace />} />
+        {/* Initial route redirect (Species selection is start route) */}
+        <Route path="/" element={<Navigate to={APP_ROUTES.animals} replace />} />
 
         {/* Auth routes */}
         <Route path={APP_ROUTES.welcome} element={<Welcome />} />
