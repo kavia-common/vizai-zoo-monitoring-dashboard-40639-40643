@@ -59,9 +59,20 @@ export default function TopBar() {
             <Link to={APP_ROUTES.chat} className="btn-secondary" style={{ display: 'block', padding: '6px 10px', borderRadius: 8, marginTop: 6 }}>
               Chat
             </Link>
-            <Link to={APP_ROUTES.login} className="btn-secondary" style={{ display: 'block', padding: '6px 10px', borderRadius: 8, marginTop: 6 }}>
+            <button
+              className="btn-secondary"
+              style={{ display: 'block', padding: '6px 10px', borderRadius: 8, marginTop: 6, width: '100%', textAlign: 'left' }}
+              onClick={() => {
+                try {
+                  localStorage.removeItem('vizai_auth_remember');
+                  localStorage.removeItem('vizai_auth_role');
+                  localStorage.removeItem('vizai_auth_email');
+                } catch {}
+                window.location.href = APP_ROUTES.login;
+              }}
+            >
               Logout
-            </Link>
+            </button>
           </div>
         </details>
       </div>

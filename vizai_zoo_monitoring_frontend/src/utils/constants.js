@@ -43,19 +43,24 @@ export const BEHAVIOR_COLORS = {
 
 export function routeToCrumbs(pathname) {
   const map = {
+    [APP_ROUTES.animals]: [{ to: APP_ROUTES.animals, label: 'Animals' }],
     [APP_ROUTES.dashboard]: [
+      { to: APP_ROUTES.animals, label: 'Animals' },
       { to: APP_ROUTES.dashboard, label: 'Giant Anteater' },
       { to: APP_ROUTES.dashboard, label: 'Dashboard' },
     ],
     [APP_ROUTES.timeline]: [
+      { to: APP_ROUTES.animals, label: 'Animals' },
       { to: APP_ROUTES.dashboard, label: 'Giant Anteater' },
       { to: APP_ROUTES.timeline, label: 'Timeline' },
     ],
     [APP_ROUTES.reports]: [
+      { to: APP_ROUTES.animals, label: 'Animals' },
       { to: APP_ROUTES.dashboard, label: 'Giant Anteater' },
       { to: APP_ROUTES.reports, label: 'Reports' },
     ],
     [APP_ROUTES.chat]: [
+      { to: APP_ROUTES.animals, label: 'Animals' },
       { to: APP_ROUTES.dashboard, label: 'Giant Anteater' },
       { to: APP_ROUTES.chat, label: 'Chat' },
     ],
@@ -63,7 +68,6 @@ export function routeToCrumbs(pathname) {
     [APP_ROUTES.alerts]: [{ to: APP_ROUTES.alerts, label: 'Alerts' }],
     [APP_ROUTES.history]: [{ to: APP_ROUTES.history, label: 'History' }],
     [APP_ROUTES.settings]: [{ to: APP_ROUTES.settings, label: 'Settings' }],
-    [APP_ROUTES.animals]: [{ to: APP_ROUTES.animals, label: 'Animals' }],
     [APP_ROUTES.welcome]: [{ to: APP_ROUTES.welcome, label: 'Welcome' }],
     [APP_ROUTES.register]: [{ to: APP_ROUTES.register, label: 'Register' }],
     [APP_ROUTES.login]: [{ to: APP_ROUTES.login, label: 'Login' }],

@@ -26,7 +26,14 @@ export default function Welcome() {
               <button
                 className="btn-secondary"
                 style={{ height: 36, padding: '0 10px' }}
-                onClick={() => navigate('/welcome')}
+                onClick={() => {
+                  try {
+                    localStorage.removeItem('vizai_auth_remember');
+                    localStorage.removeItem('vizai_auth_role');
+                    localStorage.removeItem('vizai_auth_email');
+                  } catch {}
+                  navigate('/welcome');
+                }}
                 aria-label="Logout"
                 title="Logout"
               >

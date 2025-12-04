@@ -85,6 +85,7 @@ export default function Login() {
         // ignore quota
       }
 
+      // On successful login, enforce flow to Species Selection (/animals)
       navigate('/animals', { replace: true });
       setSubmitting(false);
       return;

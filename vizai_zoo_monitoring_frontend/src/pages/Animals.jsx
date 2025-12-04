@@ -33,7 +33,7 @@ export default function Animals() {
 
   const onChoose = (a) => {
     if (a.status === 'active') {
-      // Navigate to Dashboard per spec
+      // After Species Selection, proceed to Dashboard
       navigate(APP_ROUTES.dashboard);
     } else {
       actions.openModal({
