@@ -17,6 +17,24 @@ export default function Welcome() {
         <h1 className="auth-title">Welcome to VIZAI</h1>
         <p className="auth-subtitle">Monitor, analyze, and protect your zoo habitats with AI-assisted insights.</p>
 
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <details className="user-menu" style={{ marginBottom: 8 }}>
+            <summary className="btn-secondary" style={{ padding: '6px 10px', listStyle: 'none' }}>
+              User
+            </summary>
+            <div className="card" style={{ position: 'absolute', right: 24, marginTop: 8 }}>
+              <button
+                className="btn-secondary"
+                style={{ height: 36, padding: '0 10px' }}
+                onClick={() => navigate('/welcome')}
+                aria-label="Logout"
+                title="Logout"
+              >
+                Logout
+              </button>
+            </div>
+          </details>
+        </div>
         <div className="actions">
           <button className="btn-primary" onClick={() => navigate('/register')} aria-label="Go to registration">Create account</button>
           <button className="btn-secondary" onClick={() => navigate('/login')} aria-label="Go to login">I already have an account</button>

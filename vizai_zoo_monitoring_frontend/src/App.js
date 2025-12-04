@@ -10,6 +10,7 @@ import { APP_ROUTES } from './utils/constants';
 import Welcome from './pages/Welcome';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import Animals from './pages/Animals';
 
 // Simple placeholder pages
 function Page({ title, description }) {
@@ -69,8 +70,8 @@ function App() {
         <Route path="/login" element={<Login />} />
 
         {/* App routes */}
-        <Route path={APP_ROUTES.dashboard} element={<Page title="Dashboard" description="Overview of monitored habitats and AI insights." />} />
-        <Route path="/animals" element={<Page title="Animal Selection" description="Choose an animal to view its habitat and live feed." />} />
+        <Route path={APP_ROUTES.dashboard} element={<Page title="Giant Anteater Dashboard" description="Overview of the Giant Anteater habitat and AI insights." />} />
+        <Route path="/animals" element={<Animals />} />
         <Route path={APP_ROUTES.liveFeed} element={<Page title="Live Feed" description="Real-time streams and detections." />} />
         <Route path={APP_ROUTES.alerts} element={<Page title="Alerts" description="Alert summaries and triage." />} />
         <Route path={APP_ROUTES.history} element={<Page title="History" description="Historical trends and events." />} />

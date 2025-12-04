@@ -11,6 +11,7 @@ export const APP_ROUTES = {
 };
 
 export const NAV_ITEMS = [
+  { to: APP_ROUTES.animals, label: 'Animals', icon: '🦓' },
   { to: APP_ROUTES.dashboard, label: 'Dashboard', icon: '🏠' },
   { to: APP_ROUTES.liveFeed, label: 'Live Feed', icon: '📹' },
   { to: APP_ROUTES.alerts, label: 'Alerts', icon: '🔔' },

@@ -12,7 +12,7 @@ export default function TopBar() {
     <header className="topbar">
       <div className="left">
         <button className="icon-btn" onClick={actions.toggleSidebar} aria-label="Toggle navigation">☰</button>
-        <Link to={APP_ROUTES.dashboard} className="brand">
+        <Link to={APP_ROUTES.animals} className="brand" title="Go to Animal Selection">
           VIZAI
           <span className="brand-accent">•</span>
         </Link>

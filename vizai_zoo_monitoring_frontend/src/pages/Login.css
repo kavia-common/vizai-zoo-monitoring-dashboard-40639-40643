@@ -18,6 +18,7 @@
   padding: 0 12px;
   color: var(--color-text);
 }
+.page .field input { width: 100%; }
 
 .error-banner {
   border: 1px solid rgba(239,68,68,0.45);
