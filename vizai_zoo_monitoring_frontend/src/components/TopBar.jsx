@@ -36,8 +36,8 @@ export default function TopBar() {
         <button
           className={`icon-btn ${state.alerts.unreadCount ? 'badge' : ''}`}
           onClick={actions.openAlerts}
-          aria-label="Open alerts"
-          title="Open alerts"
+          aria-label={`Open alerts${state.alerts.unreadCount ? `, ${state.alerts.unreadCount} unread` : ''}`}
+          title={`Open alerts${state.alerts.unreadCount ? ` (${state.alerts.unreadCount})` : ''}`}
         >
           🔔
           {state.alerts.unreadCount ? <span className="badge-dot" /> : null}

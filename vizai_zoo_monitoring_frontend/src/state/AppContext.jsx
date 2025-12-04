@@ -96,13 +96,14 @@ export function AppProvider({ children }) {
     }
   });
 
-  // Persist selected slices
+  // Persist selected slices (include alerts for unreadCount persistence)
   useEffect(() => {
     const toPersist = {
       theme: state.theme,
       dateRange: state.dateRange,
       filters: state.filters,
       chat: state.chat,
+      alerts: { list: state.alerts.list, unreadCount: state.alerts.unreadCount }, // persist core alert state
       navigation: { sidebarOpen: state.navigation.sidebarOpen },
     };
     try {
@@ -110,11 +111,27 @@ export function AppProvider({ children }) {
     } catch {
       // ignore quota issues
     }
-  }, [state.theme, state.dateRange, state.filters, state.chat, state.navigation.sidebarOpen]);
+  }, [state.theme, state.dateRange, state.filters, state.chat, state.alerts.list, state.alerts.unreadCount, state.navigation.sidebarOpen]);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', state.theme === 'neon' ? 'neon' : 'light');
   }, [state.theme]);
+
+  // Seed a couple of example alerts once if none exist (to demonstrate flows)
+  useEffect(() => {
+    if ((state.alerts.list || []).length === 0) {
+      const now = new Date();
+      const hh = String(now.getHours()).padStart(2, '0');
+      const mm = String(now.getMinutes()).padStart(2, '0');
+      const t = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${hh}:${mm}`;
+      const samples = [
+        { title: 'Caution spike detected', message: 'Unusual vigilance near the fence line.', level: 'warning', behavior: 'caution', time: t, hour: now.getHours(), timeOfDay: 'afternoon', thumb: 'https://placehold.co/160x90?text=Caution', src: 'https://www.w3schools.com/html/mov_bbb.mp4', duration: 18 },
+        { title: 'Exploration event', message: 'Roaming pattern reached western perimeter.', level: 'info', behavior: 'explore', time: t, hour: now.getHours(), timeOfDay: 'afternoon', thumb: 'https://placehold.co/160x90?text=Explore', src: 'https://www.w3schools.com/html/mov_bbb.mp4', duration: 33 },
+      ];
+      samples.forEach((s) => dispatch({ type: 'PUSH_ALERT', payload: s }));
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // run once
 
   const actions = useMemo(() => ({
     // PUBLIC_INTERFACE
