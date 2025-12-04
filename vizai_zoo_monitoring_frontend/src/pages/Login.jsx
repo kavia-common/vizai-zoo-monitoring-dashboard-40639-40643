@@ -21,46 +21,55 @@ export default function Login() {
   const { actions } = useApp();
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
   const DEMO_EMAIL = 'demo@vizai.ai';
   const DEMO_PASSWORD = 'demo1234';
 
   const onChange = (e) => {
-    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    setForm((f) => ({ ...f, [name]: value }));
     // Clear error as user edits inputs
     if (error) setError('');
   };
 
   const isValidEmail = (value) => /^[^@]+@[^@]+\.[^@]+$/.test(String(value || '').trim());
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
+
+    if (submitting) return;
+    setSubmitting(true);
+
     // Basic required validation + email format
     const email = String(form.email || '').trim();
     const password = String(form.password || '');
 
     if (!email || !password) {
       setError('Please enter email and password.');
+      setSubmitting(false);
       return;
     }
     if (!isValidEmail(email)) {
       setError('Enter a valid email address.');
+      setSubmitting(false);
       return;
     }
 
-    // Stubbed authentication: accept a specific demo account OR any email with the known demo password
+    // Stubbed authentication: accept only the specific demo account
     const isDemoAccount = email.toLowerCase() === DEMO_EMAIL && password === DEMO_PASSWORD;
-    const isDemoPasswordOnly = password === DEMO_PASSWORD;
 
-    if (isDemoAccount || isDemoPasswordOnly) {
+    if (isDemoAccount) {
       setError('');
       // In a real app, you might set auth state/tokens here.
       navigate('/animals', { replace: true });
+      setSubmitting(false);
       return;
     }
 
     // Only show error when inputs were valid but credentials failed
     setError('Incorrect email or password.');
+    setSubmitting(false);
   };
 
   const openForgotModal = () => {
@@ -87,6 +96,7 @@ export default function Login() {
               onChange={onChange}
               placeholder="you@zoo.org"
               autoComplete="username"
+              aria-invalid={!!error && !isValidEmail(form.email) ? 'true' : 'false'}
             />
           </div>
           <div className="field">
@@ -105,7 +115,14 @@ export default function Login() {
           <div className="row-between">
             <button type="button" className="linklike" onClick={openForgotModal}>Forgot password?</button>
           </div>
-          <button type="submit" className="btn-primary wide" aria-label="Login">Sign in</button>
+          <button
+            type="submit"
+            className="btn-primary wide"
+            aria-label="Login"
+            disabled={submitting}
+          >
+            {submitting ? 'Signing in…' : 'Sign in'}
+          </button>
         </form>
 
         <div className="auth-footer">

@@ -53,6 +53,11 @@
   font-weight: 800;
   cursor: pointer;
 }
+.btn-primary.wide[disabled] {
+  opacity: 0.7;
+  cursor: not-allowed;
+  filter: grayscale(0.1);
+}
 
 .auth-shell { min-height: 100vh; display: grid; place-items: center; padding: 24px 12px; }
 .brand-badge { display: inline-grid; place-items: center; font-weight: 900; letter-spacing: .8px; padding: 8px 12px; background: var(--color-surface-2); border: 1px solid var(--color-border); border-radius: 10px; box-shadow: var(--shadow); width: fit-content; margin: 0 0 10px 0; }
