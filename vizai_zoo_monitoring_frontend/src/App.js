@@ -66,16 +66,16 @@ function App() {
     <AppChrome>
       <Routes>
         {/* Initial route redirect */}
-        <Route path="/" element={<Navigate to="/welcome" replace />} />
+        <Route path="/" element={<Navigate to={APP_ROUTES.welcome} replace />} />
 
         {/* Auth routes */}
-        <Route path="/welcome" element={<Welcome />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route path={APP_ROUTES.welcome} element={<Welcome />} />
+        <Route path={APP_ROUTES.register} element={<Register />} />
+        <Route path={APP_ROUTES.login} element={<Login />} />
 
         {/* App routes */}
         <Route path={APP_ROUTES.dashboard} element={<Dashboard />} />
-        <Route path="/animals" element={<Animals />} />
+        <Route path={APP_ROUTES.animals} element={<Animals />} />
         <Route path={APP_ROUTES.timeline} element={<Timeline />} />
         <Route path={APP_ROUTES.reports} element={<Reports />} />
         <Route path={APP_ROUTES.chat} element={<Chat />} />
@@ -87,7 +87,7 @@ function App() {
         <Route path={APP_ROUTES.settings} element={<Page title="Settings" description="Application preferences." />} />
 
         {/* Fallback */}
-        <Route path="*" element={<Navigate to="/welcome" replace />} />
+        <Route path="*" element={<Navigate to={APP_ROUTES.welcome} replace />} />
       </Routes>
     </AppChrome>
   );

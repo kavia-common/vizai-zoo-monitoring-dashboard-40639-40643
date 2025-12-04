@@ -1,5 +1,5 @@
 export const APP_ROUTES = {
-  dashboard: '/',
+  dashboard: '/dashboard',
   timeline: '/timeline',
   reports: '/reports',
   chat: '/chat',
@@ -32,18 +32,34 @@ export const BEHAVIOR_COLORS = {
 
 export function routeToCrumbs(pathname) {
   const map = {
-    '/': [{ to: '/', label: 'Home' }, { to: '/animals', label: 'Giant Anteater' }, { to: '/', label: 'Dashboard' }],
-    '/timeline': [{ to: '/', label: 'Home' }, { to: '/animals', label: 'Giant Anteater' }, { to: '/timeline', label: 'Timeline' }],
-    '/reports': [{ to: '/', label: 'Home' }, { to: '/animals', label: 'Giant Anteater' }, { to: '/reports', label: 'Reports' }],
-    '/chat': [{ to: '/', label: 'Home' }, { to: '/animals', label: 'Giant Anteater' }, { to: '/chat', label: 'Chat' }],
-    '/live': [{ to: '/', label: 'Home' }, { to: '/live', label: 'Live Feed' }],
-    '/alerts': [{ to: '/', label: 'Home' }, { to: '/alerts', label: 'Alerts' }],
-    '/history': [{ to: '/', label: 'Home' }, { to: '/history', label: 'History' }],
-    '/settings': [{ to: '/', label: 'Home' }, { to: '/settings', label: 'Settings' }],
-    '/animals': [{ to: '/', label: 'Home' }, { to: '/animals', label: 'Animals' }],
-    '/welcome': [{ to: '/welcome', label: 'Welcome' }],
-    '/register': [{ to: '/register', label: 'Register' }],
-    '/login': [{ to: '/login', label: 'Login' }],
+    [APP_ROUTES.dashboard]: [
+      { to: APP_ROUTES.animals, label: 'Animals' },
+      { to: APP_ROUTES.dashboard, label: 'Giant Anteater' },
+      { to: APP_ROUTES.dashboard, label: 'Dashboard' },
+    ],
+    [APP_ROUTES.timeline]: [
+      { to: APP_ROUTES.animals, label: 'Animals' },
+      { to: APP_ROUTES.dashboard, label: 'Giant Anteater' },
+      { to: APP_ROUTES.timeline, label: 'Timeline' },
+    ],
+    [APP_ROUTES.reports]: [
+      { to: APP_ROUTES.animals, label: 'Animals' },
+      { to: APP_ROUTES.dashboard, label: 'Giant Anteater' },
+      { to: APP_ROUTES.reports, label: 'Reports' },
+    ],
+    [APP_ROUTES.chat]: [
+      { to: APP_ROUTES.animals, label: 'Animals' },
+      { to: APP_ROUTES.dashboard, label: 'Giant Anteater' },
+      { to: APP_ROUTES.chat, label: 'Chat' },
+    ],
+    [APP_ROUTES.liveFeed]: [{ to: APP_ROUTES.liveFeed, label: 'Live Feed' }],
+    [APP_ROUTES.alerts]: [{ to: APP_ROUTES.alerts, label: 'Alerts' }],
+    [APP_ROUTES.history]: [{ to: APP_ROUTES.history, label: 'History' }],
+    [APP_ROUTES.settings]: [{ to: APP_ROUTES.settings, label: 'Settings' }],
+    [APP_ROUTES.animals]: [{ to: APP_ROUTES.animals, label: 'Animals' }],
+    [APP_ROUTES.welcome]: [{ to: APP_ROUTES.welcome, label: 'Welcome' }],
+    [APP_ROUTES.register]: [{ to: APP_ROUTES.register, label: 'Register' }],
+    [APP_ROUTES.login]: [{ to: APP_ROUTES.login, label: 'Login' }],
   };
-  return map[pathname] || [{ to: '/', label: 'Home' }];
+  return map[pathname] || [{ to: APP_ROUTES.dashboard, label: 'Dashboard' }];
 }
