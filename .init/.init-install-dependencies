@@ -1,0 +1,4 @@
+{
+    "command": "npm install",
+    "working_directory": "/home/kavia/workspace/code-generation/vizai-zoo-monitoring-dashboard-40639-40643/vizai_zoo_monitoring_frontend"
+}
