@@ -20,6 +20,8 @@ export default function TopBar() {
       <div className="center">
         <span className="daterange" role="button" tabIndex={0} aria-label="Date range selector placeholder">
           {state.dateRange.preset}
+          {state.dateRange.from ? ` • ${state.dateRange.from}` : ''}
+          {state.dateRange.to ? ` → ${state.dateRange.to}` : ''}
         </span>
       </div>
       <div className="right">

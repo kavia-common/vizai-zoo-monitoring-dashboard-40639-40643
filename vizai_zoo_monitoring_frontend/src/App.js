@@ -11,8 +11,12 @@ import Welcome from './pages/Welcome';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Animals from './pages/Animals';
+import Dashboard from './pages/Dashboard';
+import Timeline from './pages/Timeline';
+import Reports from './pages/Reports';
+import Chat from './pages/Chat';
 
-// Simple placeholder pages
+// Simple placeholder pages (still used by some routes)
 function Page({ title, description }) {
   return (
     <div className="page">
@@ -70,10 +74,15 @@ function App() {
         <Route path="/login" element={<Login />} />
 
         {/* App routes */}
-        <Route path={APP_ROUTES.dashboard} element={<Page title="Giant Anteater Dashboard" description="Overview of the Giant Anteater habitat and AI insights." />} />
+        <Route path={APP_ROUTES.dashboard} element={<Dashboard />} />
         <Route path="/animals" element={<Animals />} />
+        <Route path={APP_ROUTES.timeline} element={<Timeline />} />
+        <Route path={APP_ROUTES.reports} element={<Reports />} />
+        <Route path={APP_ROUTES.chat} element={<Chat />} />
+
+        {/* Keep other global navigation items */}
         <Route path={APP_ROUTES.liveFeed} element={<Page title="Live Feed" description="Real-time streams and detections." />} />
-        <Route path={APP_ROUTES.alerts} element={<Page title="Alerts" description="Alert summaries and triage." />} />
+        <Route path={APP_ROUTES.alerts} element={<Page title="Alerts" description="Alert summaries and events." />} />
         <Route path={APP_ROUTES.history} element={<Page title="History" description="Historical trends and events." />} />
         <Route path={APP_ROUTES.settings} element={<Page title="Settings" description="Application preferences." />} />
 

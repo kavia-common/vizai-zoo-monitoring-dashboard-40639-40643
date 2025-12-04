@@ -1,5 +1,8 @@
 export const APP_ROUTES = {
   dashboard: '/',
+  timeline: '/timeline',
+  reports: '/reports',
+  chat: '/chat',
   liveFeed: '/live',
   alerts: '/alerts',
   history: '/history',
@@ -28,9 +31,11 @@ export const BEHAVIOR_COLORS = {
 };
 
 export function routeToCrumbs(pathname) {
-  // very basic crumb builder
   const map = {
-    '/': [{ to: '/', label: 'Home' }],
+    '/': [{ to: '/', label: 'Home' }, { to: '/animals', label: 'Giant Anteater' }, { to: '/', label: 'Dashboard' }],
+    '/timeline': [{ to: '/', label: 'Home' }, { to: '/animals', label: 'Giant Anteater' }, { to: '/timeline', label: 'Timeline' }],
+    '/reports': [{ to: '/', label: 'Home' }, { to: '/animals', label: 'Giant Anteater' }, { to: '/reports', label: 'Reports' }],
+    '/chat': [{ to: '/', label: 'Home' }, { to: '/animals', label: 'Giant Anteater' }, { to: '/chat', label: 'Chat' }],
     '/live': [{ to: '/', label: 'Home' }, { to: '/live', label: 'Live Feed' }],
     '/alerts': [{ to: '/', label: 'Home' }, { to: '/alerts', label: 'Alerts' }],
     '/history': [{ to: '/', label: 'Home' }, { to: '/history', label: 'History' }],
